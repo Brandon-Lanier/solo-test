@@ -19,7 +19,7 @@ function Details() {
     const dispatch = useDispatch();
 
     const history = useHistory();
-    
+
     const coinDetails = useSelector(store => store.coinDetails[0])
 
 
@@ -43,6 +43,21 @@ function Details() {
         history.push('/about')
     }
 
+    // ********************************* //
+    // Add STUFF //
+    
+    const newCoin = {
+        coin: '',
+        quantity: 0
+    }
+    const [coin, setAddCoin] = useState(newCoin);
+    const [coinValue, setCoinValue] = useState(0)
+
+    const addCoin = () => {
+        
+    }
+
+    console.log(coinValue);
 
 console.log('the coin selected is', coinDetails);
 
@@ -55,6 +70,9 @@ console.log('the coin selected is', coinDetails);
             <br></br>
             {<img src={coinDetails?.image} />}
             <button onClick={handleBack}>Go back</button>
+            <br></br>
+            <input type="number" onChange={(e) => setAddCoin(e.target.value)} />
+            <button onClick={addCoin}>Add To Portfolio</button>
         </>
 
     )
