@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Details from '../Details/Details';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    dispatch({type: 'FETCH_MARKET'})
   }, [dispatch]);
 
   return (
@@ -109,6 +111,9 @@ function App() {
               <LandingPage />
             }
           </Route>
+          <Route path='/details/:id'>
+            <Details />
+            </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
