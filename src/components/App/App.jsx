@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Details from '../Details/Details';
+import AddCoins from '../AddCoins/AddCoins';
 
 import './App.css';
 
@@ -111,9 +112,12 @@ function App() {
               <LandingPage />
             }
           </Route>
-          <Route path='/details/:id'>
+          <Route path="/details/:id">
             <Details />
             </Route>
+          <Route path="/addcoin/:id">
+            <AddCoins />
+          </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

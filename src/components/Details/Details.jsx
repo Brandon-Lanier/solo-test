@@ -46,18 +46,34 @@ function Details() {
     // ********************************* //
     // Add STUFF //
     
-    const newCoin = {
-        coin: '',
-        quantity: 0
-    }
-    const [coin, setAddCoin] = useState(newCoin);
-    const [coinValue, setCoinValue] = useState(0)
+    // const newCoin = {
+    //     coin: '',
+    //     quantity: 0
+    // }
+    // const [coinAmount, setCoinAmount] = useState(newCoin);
+    // const [coinValue, setValue] = useState(0)
+
+    const [coinQty, setCoinQty] = useState('')
+    const [coinId, setCoinId] = useState('')
+    const [dollarAmount, setDollarAmount] = useState('');
+    const [value, setValue] = useState('')
+
+    let currentPrice = coinDetails?.current_price;
+   
+    // const handleUpdate = (e) => {
+    //     setCoinQty(e.target.value);
+    //     // handlePriceChange();
+    // }
+
+    // const handlePriceChange = () => {
+    //     setDollarAmount(currentPrice * coinQty);
+    //     console.log(dollarAmount);
+    // }
 
     const addCoin = () => {
-        
+        history.push(`/addcoin/${id}`);
     }
 
-    console.log(coinValue);
 
 console.log('the coin selected is', coinDetails);
 
@@ -69,9 +85,12 @@ console.log('the coin selected is', coinDetails);
             {coinDetails?.current_price}
             <br></br>
             {<img src={coinDetails?.image} />}
+            <br></br>
             <button onClick={handleBack}>Go back</button>
             <br></br>
-            <input type="number" onChange={(e) => setAddCoin(e.target.value)} />
+            {/* Below Works but want to try updating pricing dynamically */}
+            {/* <input type="number" value={coinQty} onChange={(e) => setCoinQty(e.target.value)} /> */}
+            {/* <input type="text" value={coinQty} onChange={handleUpdate} /> */}
             <button onClick={addCoin}>Add To Portfolio</button>
         </>
 
