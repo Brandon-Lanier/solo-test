@@ -14,20 +14,29 @@ function AddCoins() {
     // const [dollarAmount, setDollarAmount] = useState('');
     // const [value, setValue] = useState('')
 
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    // Setting the input and dynamic dollar changing amounts
     const [quantity, setQuantity] = useState(0);
     const [dollarAmount, setDollarAmount] = useState(0)
 
     const coin = useSelector(store => store.coinDetails[0])
    
+    // On change of the input field, the state of quantity is updated and the total value is updated.
     const handleUpdate = (e) => {
         setQuantity(e.target.value);
         setDollarAmount(e.target.value * coin.current_price)
         console.log(quantity, dollarAmount);
     }
 
+    // Sending the coin and quantity to a Saga to handle post to DB.
     const addCoin = () => {
-        setCoinId(id)
-        console.log('Dollar Amount', dollarAmount);
+        if (confirm(`Add ${quantity} ${coin.name} for a current value of ${dollarAmount}?`)) {
+            dispatch({type: 'ADD_COIN', payload: {coin: coin, quantity: quantity}})
+            alert('Coin Added to portfolio');
+            history.push('/about')
+        }
     }
 
     
@@ -36,7 +45,9 @@ function AddCoins() {
             <h2>Add {coin.name} to your portfolio!</h2>
             <p>Amount to purchase</p>
             <input type='number' value={quantity} onChange={handleUpdate}/>
-            <p>Market Value: {dollarAmount}</p>
+            <p>Market Value: {(Number(dollarAmount.toFixed(2)))}</p>
+            <button onClick={addCoin}>Add Coin</button>
+
         </div>
 
     )
