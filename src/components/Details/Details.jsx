@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import LineChart from "../LineChart/LineChart";
+
 
 
 function Details() {
@@ -13,14 +15,50 @@ function Details() {
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch({ type: 'GET_DETAILS', payload: id })
+        dispatch({ type: 'GET_DETAILS', payload: id });
     }, [])
 
     const dispatch = useDispatch();
 
     const history = useHistory();
+    const [loading, setLoading] = useState(true);
+    const coinDetails = useSelector(store => store.coinDetails[0]);
+    const chartData = useSelector(store => store.charts)
+    console.log(chartData);
 
-    const coinDetails = useSelector(store => store.coinDetails[0])
+    // ----------------------Chart Stuff------------------------------- //
+  
+    let priceData = []
+    
+    const parseChartData = (dataArray) => {
+
+        dataArray.forEach((subArray) => {priceData.push({x: subArray[0], y: Number(subArray[1].toFixed(2))})});
+       
+        dispatch({type: 'SET_CHART_DATA', payload: priceData})
+    }
+    //    https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=30&interval=daily`)
+
+
+    //    const getChartData = () => {
+    //        axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=30&interval=daily`)
+    //        .then(result => {
+    //            parseChartData(result.data.prices)
+    //            setLoading(false)
+    //        }).catch(error => {
+    //            console.log('Error getting chart data', error);
+
+    //        })
+    //    }
+
+    //    let pricePerDay = []
+
+    //    const parseChartData = (dataArray) => {
+    //        dataArray.forEach((subArray) => {pricePerDay.push({x: subArray[0], y: Number(subArray[1].toFixed(2))})});
+    //        console.log(pricePerDay);
+    //    }
+    // dataArray.forEach(subArray => parsedData.push({price: subArray[0], date: subArray[1]}))
+    // console.log(parsedData);
+    // ----------------------------------------------------- //
 
 
     // const [coinDetails, setCoinDetails] = useState({}); 
@@ -39,13 +77,13 @@ function Details() {
     console.log('Coin id is', id);
 
     const handleBack = () => {
-        dispatch({type: 'CLEAR_DETAILS'})
+        dispatch({ type: 'CLEAR_DETAILS' })
         history.push('/about')
     }
 
     // ********************************* //
     // Add STUFF //
-    
+
     // const newCoin = {
     //     coin: '',
     //     quantity: 0
@@ -59,7 +97,7 @@ function Details() {
     const [value, setValue] = useState('')
 
     let currentPrice = coinDetails?.current_price;
-   
+
     // const handleUpdate = (e) => {
     //     setCoinQty(e.target.value);
     //     // handlePriceChange();
@@ -75,26 +113,35 @@ function Details() {
     }
 
 
-console.log('the coin selected is', coinDetails);
+    console.log('the coin selected is', coinDetails);
 
     return (
         <>
-            {/* {id} */}
-            {coinDetails?.name}
-            <br></br>
-            {coinDetails?.current_price}
-            <br></br>
-            {<img src={coinDetails?.image} />}
-            <br></br>
-            <button onClick={handleBack}>Go back</button>
-            <br></br>
-            {/* Below Works but want to try updating pricing dynamically */}
-            {/* <input type="number" value={coinQty} onChange={(e) => setCoinQty(e.target.value)} /> */}
-            {/* <input type="text" value={coinQty} onChange={handleUpdate} /> */}
-            <button onClick={addCoin}>Add To Portfolio</button>
+            <div>
+              
+                <LineChart
+                    id={id}
+                />
+            
+                {/* {id} */}
+                {coinDetails?.name}
+                <br></br>
+                {coinDetails?.current_price}
+                <br></br>
+                {<img src={coinDetails?.image} />}
+                <br></br>
+                <button onClick={handleBack}>Go back</button>
+                <br></br>
+                {/* Below Works but want to try updating pricing dynamically */}
+                {/* <input type="number" value={coinQty} onChange={(e) => setCoinQty(e.target.value)} /> */}
+                {/* <input type="text" value={coinQty} onChange={handleUpdate} /> */}
+                <button onClick={addCoin}>Add To Portfolio</button>
+            </div>
+
         </>
 
     )
+
 }
 
 export default Details;

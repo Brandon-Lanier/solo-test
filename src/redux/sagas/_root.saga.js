@@ -6,6 +6,8 @@ import fetchMarketSaga from './market.saga';
 import getDetailsSaga from './details.saga';
 import addCoinSaga from './addcoin.saga';
 import getAssetsSaga from './assets.saga';
+import getChartSaga from './chart.saga';
+
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -22,6 +24,7 @@ export default function* rootSaga() {
     fetchMarketSaga(),
     getDetailsSaga(),
     addCoinSaga(),
-    getAssetsSaga()
+    getAssetsSaga(),
+    getChartSaga()
   ]);
 }

@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Details from '../Details/Details';
 import AddCoins from '../AddCoins/AddCoins';
+import Portfolio from '../Portfolio/Portfolio';
 
 import './App.css';
 
@@ -117,6 +118,9 @@ function App() {
             </Route>
           <Route path="/addcoin/:id">
             <AddCoins />
+          </Route>
+          <Route>
+            <Portfolio />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
