@@ -14,6 +14,7 @@ function AboutPage() {
 
   useEffect(() => {
     dispatch({type: 'FETCH_MARKET'})
+    dispatch({type: 'GET_ASSETS'})
   }, []);
 
   const marketData = useSelector(store => store.market);

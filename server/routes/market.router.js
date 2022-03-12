@@ -20,14 +20,17 @@ router.post('/', (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.user.id);
         const coinName = req.body.coin.name;
-        const coinTicker = req.body.coin.id
+        const symbol = req.body.coin.symbol
         const quantity = Number(req.body.quantity)
         const qty = quantity.toFixed(4) // Changing to 4 decimals for DB storage
         const userId = req.user.id
         const qryTxt = `
-            INSERT INTO "assets" ("name", "ticker", "quantity", "user_id")
-            VALUES ($1, $2, $3, $4);`
-        pool.query(qryTxt, [coinName, coinTicker, qty, userId])
+        INSERT INTO "assets" ("name", "symbol", "quantity", "user_id") 
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT ("symbol")
+        DO UPDATE SET "quantity" = "assets"."quantity" + $5;`
+
+        pool.query(qryTxt, [coinName, symbol, qty, userId, qty])
             .then(result => {
                 console.log('You added a coin!');
                 res.sendStatus(201)
