@@ -48,13 +48,42 @@ function LineChartCoin({ id }) {
                     datasets: [{
                         label: `30 Day ${id} Price`,
                         data: graphData,
-                        borderWidth: 2
+                        borderWidth: 4,
+                        backgroundColor: '#99d6ff',
+                        pointRadius: 1,
+                        borderColor: '#99d6ff',
+                        fill: 'true',
+                        tension: 0.1
                     }] 
                 }}
+                height={300}
+                width={300}
                 options={{
+                    lineHeightAnnotation: {
+                        always: true,
+                        hover: false,
+                        lineHeight: 1.5
+                    },
+                    animation: {
+                        duration: 2000
+                    },
                     scales: {
-                        xAxes: 'time'
-                    }
+                        x: {
+                          type: 'time',
+                          time: {
+                            minUnit: 'day'
+                          },
+                          distribution: 'linear'
+                        },
+                        // y: {
+                        //   ticks: {
+                        //     stepSize: 0,
+                        //   },
+                        // },
+                      },
+                      maintainAspectRatio: false,
+                      responsive: true,
+                    
                 }}
                 />
         </div>
