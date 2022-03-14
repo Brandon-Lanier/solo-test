@@ -126,9 +126,9 @@ function Details() {
                 {/* {id} */}
                 {coinDetails?.name}
                 <br></br>
-                {coinDetails?.current_price}
+                ${coinDetails?.current_price}
                 <br></br>
-                {<img src={coinDetails?.image} />}
+                {<img src={coinDetails?.image} width="75px" height="75px"/>}
                 <br></br>
                 <button onClick={handleBack}>Go back</button>
                 <br></br>

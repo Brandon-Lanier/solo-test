@@ -48,12 +48,13 @@ function LineChartCoin({ id }) {
                     datasets: [{
                         label: `30 Day ${id} Price`,
                         data: graphData,
-                        borderWidth: 4,
-                        backgroundColor: '#99d6ff',
-                        pointRadius: 1,
-                        borderColor: '#99d6ff',
-                        fill: 'true',
-                        tension: 0.1
+                        borderWidth: 2,
+                        backgroundColor: '#5273ba',
+                        pointRadius: 0,
+                        borderColor: '#5273ba',
+                        fill: {
+                            target: origin
+                        },
                     }] 
                 }}
                 height={300}

@@ -5,6 +5,7 @@ import market from './market.reducer'
 import coinDetails from './details.reducer.jsx';
 import assets from './assets.reducer.jsx';
 import charts from './history.reducer.jsx'
+import total from './total.reducer.jsx'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   market,
   coinDetails,
   assets,
-  charts
+  charts,
+  total
 });
 
 export default rootReducer;

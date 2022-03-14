@@ -32,6 +32,7 @@ function AddCoins() {
 
     // Sending the coin and quantity to a Saga to handle post to DB.
     const addCoin = () => {
+        console.log(coin);
         if (confirm(`Add ${quantity} ${coin.name} for a current value of ${dollarAmount}?`)) {
             dispatch({type: 'ADD_COIN', payload: {coin: coin, quantity: quantity}})
             alert('Coin Added to portfolio');
